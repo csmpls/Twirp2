@@ -54,13 +54,5 @@
         android:layout_marginRight="10dip"
         android:layout_marginTop="50dip"
         android:visibility="gone"/>
-
-    <Button android:id="@+id/goToAlarm"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="Go to alarm"
-        android:onClick="switchToAlarm"
-        android:layout_marginLeft="10dip"
-        android:layout_marginRight="10dip" />
  
 </LinearLayout>

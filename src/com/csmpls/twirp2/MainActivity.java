@@ -212,11 +212,6 @@ public class MainActivity extends Activity {
          
     }
 
-    public void switchToAlarm(View view) {
-        Intent intent = new Intent(this, AlarmSetActivity.class);
-        startActivity(intent);
-    }
-    
     /**
      * Switch to tweet interface
      * */
