@@ -211,19 +211,25 @@ public class MainActivity extends Activity {
         }
          
     }
+
+    public void switchToAlarm(View view) {
+        Intent intent = new Intent(this, AlarmSetActivity.class);
+        startActivity(intent);
+    }
     
     /**
      * Switch to tweet interface
      * */
     private void showTweetInterface() {
-    	// Hide login button
+        // logIN > logOUT 
         btnLoginTwitter.setVisibility(View.GONE);
-        
-    	// Show Update Twitter
-        lblUpdate.setVisibility(View.VISIBLE);
+    	btnLogoutTwitter.setVisibility(View.VISIBLE);
+
+        // show tweet things
         txtUpdate.setVisibility(View.VISIBLE);
-        btnUpdateStatus.setVisibility(View.VISIBLE);
-        btnLogoutTwitter.setVisibility(View.VISIBLE);
+        lblUpdate.setVisibility(View.VISIBLE);
+        lblUserName.setText("");
+        lblUserName.setVisibility(View.VISIBLE);
     }
     
  
@@ -250,9 +256,7 @@ public class MainActivity extends Activity {
                 e.printStackTrace();
             }
         } else {
-            // user already logged into twitter
-            Toast.makeText(getApplicationContext(),
-                    "Already Logged into twitter", Toast.LENGTH_LONG).show();
+            showTweetInterface();
         }
     }
  
@@ -339,9 +343,7 @@ public class MainActivity extends Activity {
         e.remove(PREF_KEY_TWITTER_LOGIN);
         e.commit();
  
-        // After this take the appropriate action
-        // I am showing the hiding/showing buttons again
-        // You might not needed this code
+        // hide tweet things
         btnLogoutTwitter.setVisibility(View.GONE);
         btnUpdateStatus.setVisibility(View.GONE);
         txtUpdate.setVisibility(View.GONE);

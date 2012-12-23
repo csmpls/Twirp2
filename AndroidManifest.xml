@@ -23,16 +23,28 @@
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="oauth" android:host="t4jsample"/>
+
+                <data
+                    android:host="t4jsample"
+                    android:scheme="oauth" />
             </intent-filter>
         </activity>
+        <activity
+        android:name="com.example.myfirstapp.DisplayMessageActivity"
+        android:parentActivityName="com.csmpls.twirp2.MainActivity" >
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="com.csmpls.twirp2.MainActivity" />
+    	</activity>    
+    	
     </application>
-    
+
     <!-- Permission - Internet Connect -->
     <uses-permission android:name="android.permission.INTERNET" />
- 
+
     <!-- Network State Permissions -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
