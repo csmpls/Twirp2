@@ -14,15 +14,16 @@ public final class R {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int btnLoginTwitter=0x7f070002;
-        public static final int btnLogoutTwitter=0x7f070007;
-        public static final int btnUpdateStatus=0x7f070006;
-        public static final int goToTweet=0x7f070001;
-        public static final int lblUpdate=0x7f070004;
-        public static final int lblUserName=0x7f070003;
-        public static final int menu_settings=0x7f070008;
+        public static final int btnLoginTwitter=0x7f070003;
+        public static final int btnLogoutTwitter=0x7f070008;
+        public static final int btnUpdateStatus=0x7f070007;
+        public static final int goToTweet=0x7f070002;
+        public static final int lblUpdate=0x7f070005;
+        public static final int lblUserName=0x7f070004;
+        public static final int menu_settings=0x7f070009;
+        public static final int setAlarm=0x7f070001;
         public static final int timePicker=0x7f070000;
-        public static final int txtUpdateStatus=0x7f070005;
+        public static final int txtUpdateStatus=0x7f070006;
     }
     public static final class layout {
         public static final int activity_alarm_set=0x7f030000;
