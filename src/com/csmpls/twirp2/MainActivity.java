@@ -149,10 +149,6 @@ public class MainActivity extends Activity {
                     // update status
                     new updateTwitterStatus().execute(status);
 
-                    //okay, user has tweeted, stop alarm
-                    mMediaPlayer.stop();
-                    mMediaPlayer.release();
-                    mMediaPlayer = null;
                 } else {
                     // EditText is empty
                     Toast.makeText(getApplicationContext(),
@@ -326,6 +322,14 @@ public class MainActivity extends Activity {
                             .show();
                     // Clearing EditText field
                     txtUpdate.setText("");
+
+                    //okay, user has tweeted, stop alarm
+                    mMediaPlayer.stop();
+                    mMediaPlayer.release();
+                    mMediaPlayer = null;
+
+                    //close screen
+                    finish();
                 }
             });
         }
