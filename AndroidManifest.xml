@@ -42,6 +42,8 @@
 
         <receiver android:process=":remote"
                 android:name="AlarmReceiver" />    
+
+        <service android:name="AlarmSoundService_service" /> 
     	
     </application>
 
@@ -50,5 +52,8 @@
 
     <!-- Network State Permissions -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <!-- Wake Lock Permissions -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
 </manifest>

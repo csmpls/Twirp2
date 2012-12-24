@@ -25,7 +25,7 @@
     <Button android:id="@+id/goToTweet"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="go tweet"
+        android:text="test alarm"
         android:onClick="goToTweetActivity"
         android:layout_marginLeft="10dip"
         android:layout_marginRight="10dip" />

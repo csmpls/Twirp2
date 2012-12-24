@@ -74,6 +74,9 @@ public class MainActivity extends Activity {
  
     // Alert Dialog Manager
     AlertDialogManager alert = new AlertDialogManager();
+
+    //alarm
+    private AlarmSoundService mAlarmService;
  
     @Override
     public void onCreate(Bundle savedInstanceState) {
