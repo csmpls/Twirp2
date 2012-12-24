@@ -24,6 +24,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.media.MediaPlayer;
 
 public class MainActivity extends Activity {
     // Constants
@@ -51,8 +52,6 @@ public class MainActivity extends Activity {
     Button btnLoginTwitter;
     // Update status button
     Button btnUpdateStatus;
-    // Logout button
-    Button btnLogoutTwitter;
     // EditText for update
     EditText txtUpdate;
     // lbl update
@@ -76,14 +75,21 @@ public class MainActivity extends Activity {
     AlertDialogManager alert = new AlertDialogManager();
 
     //alarm
-    private AlarmSoundService mAlarmService;
+    MediaPlayer mMediaPlayer = null;
  
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
- 
+        
+        // start alarm playing
+        mMediaPlayer = MediaPlayer.create(this, R.raw.alarm_file);
+        mMediaPlayer.start();
+        
+        //
+        // twitter block
+        //
         cd = new ConnectionDetector(getApplicationContext());
  
         // Check if Internet present
@@ -106,7 +112,6 @@ public class MainActivity extends Activity {
         // All UI elements
         btnLoginTwitter = (Button) findViewById(R.id.btnLoginTwitter);
         btnUpdateStatus = (Button) findViewById(R.id.btnUpdateStatus);
-        btnLogoutTwitter = (Button) findViewById(R.id.btnLogoutTwitter);
         txtUpdate = (EditText) findViewById(R.id.txtUpdateStatus);
         lblUpdate = (TextView) findViewById(R.id.lblUpdate);
         lblUserName = (TextView) findViewById(R.id.lblUserName);
@@ -143,6 +148,11 @@ public class MainActivity extends Activity {
                 if (status.trim().length() > 0) {
                     // update status
                     new updateTwitterStatus().execute(status);
+
+                    //okay, user has tweeted, stop alarm
+                    mMediaPlayer.stop();
+                    mMediaPlayer.release();
+                    mMediaPlayer = null;
                 } else {
                     // EditText is empty
                     Toast.makeText(getApplicationContext(),
@@ -152,17 +162,7 @@ public class MainActivity extends Activity {
             }
         });
  
-        /**
-         * Button click event for logout from twitter
-         * */
-        btnLogoutTwitter.setOnClickListener(new View.OnClickListener() {
- 
-            @Override
-            public void onClick(View arg0) {
-                // Call logout twitter function
-                logoutFromTwitter();
-            }
-        });
+    
  
         /** This if conditions is tested once is
          * redirected from twitter page. Parse the uri to get oAuth
@@ -212,6 +212,8 @@ public class MainActivity extends Activity {
         } else {
         	showTweetInterface();
         }
+
+
          
     }
 
@@ -222,11 +224,11 @@ public class MainActivity extends Activity {
     private void showTweetInterface() {
         // logIN > logOUT 
         btnLoginTwitter.setVisibility(View.GONE);
-    	btnLogoutTwitter.setVisibility(View.VISIBLE);
 
         // show tweet things
         txtUpdate.setVisibility(View.VISIBLE);
         lblUpdate.setVisibility(View.VISIBLE);
+        btnUpdateStatus.setVisibility(View.VISIBLE);
         lblUserName.setText("");
         lblUserName.setVisibility(View.VISIBLE);
     }
@@ -343,7 +345,6 @@ public class MainActivity extends Activity {
         e.commit();
  
         // hide tweet things
-        btnLogoutTwitter.setVisibility(View.GONE);
         btnUpdateStatus.setVisibility(View.GONE);
         txtUpdate.setVisibility(View.GONE);
         lblUpdate.setVisibility(View.GONE);
@@ -363,49 +364,6 @@ public class MainActivity extends Activity {
     }
 
 
-    private ServiceConnection mConnection = new ServiceConnection() {
-        public void onServiceConnected(ComponentName className, IBinder service) {
-            // This is called when the connection with the service has been
-            // established, giving us the service object we can use to
-            // interact with the service.  Because we have bound to a explicit
-            // service that we know is running in our own process, we can
-            // cast its IBinder to a concrete class and directly access it.
-            mAlarmService = ((LocalService.LocalBinder)service).getService();
-        }
-
-        public void onServiceDisconnected(ComponentName className) {
-            // This is called when the connection with the service has been
-            // unexpectedly disconnected -- that is, its process crashed.
-            // Because it is running in our same process, we should never
-            // see this happen.
-            mAlarmService = null;
-        }
-    };
-
-    void doBindService() {
-        // Establish a connection with the service.  We use an explicit
-        // class name because we want a specific service implementation that
-        // we know will be running in our own process (and thus won't be
-        // supporting component replacement by other applications).
-        bindService(new Intent(Binding.this, 
-                LocalService.class), mConnection, Context.BIND_AUTO_CREATE);
-        mIsBound = true;
-    }
-
-    void doUnbindService() {
-        if (mIsBound) {
-            // Detach our existing connection.
-            unbindService(mConnection);
-            mIsBound = false;
-        }
-    }
-
-@Override
-protected void onDestroy() {
-    super.onDestroy();
-    doUnbindService();
-}
- 
     protected void onResume() {
         super.onResume();
     }

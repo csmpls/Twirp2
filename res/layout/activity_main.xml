@@ -22,7 +22,7 @@
  
     <!-- label update status -->
     <TextView android:id="@+id/lblUpdate"
-        android:text="Update Status"
+        android:text="tweet something"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dip"
@@ -44,15 +44,5 @@
         android:layout_marginLeft="10dip"
         android:layout_marginRight="10dip"
         android:visibility="gone"/>
- 
-    <!-- Twitter Logout button -->
-    <Button android:id="@+id/btnLogoutTwitter"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="Logout from Twitter"
-        android:layout_marginLeft="10dip"
-        android:layout_marginRight="10dip"
-        android:layout_marginTop="50dip"
-        android:visibility="gone"/>
- 
+  
 </LinearLayout>
