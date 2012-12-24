@@ -1,7 +1,6 @@
 package com.csmpls.twirp2;
 
 import android.app.Service;
-import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
@@ -9,6 +8,7 @@ import android.os.Binder;
 import android.os.IBinder;
 import android.os.PowerManager;
 import android.util.Log;
+import android.widget.Toast;
 
 public class AlarmSoundService extends Service implements MediaPlayer.OnPreparedListener {
 
@@ -18,21 +18,23 @@ public class AlarmSoundService extends Service implements MediaPlayer.OnPrepared
     @Override
     public void onCreate() {
 
-        // get audio focus for alarm
-        am = mContext.getSystemService(Context.AUDIO_SERVICE);
-        int result = am.requestAudioFocus(afChangeListener,
-                    // Use the alarm stream.
-                    AudioManager.ALARM_STREAM,
-                    // Request permanent focus.
-                    AudioManager.AUDIOFOCUS_GAIN);
-
-        if (result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
+//        // get audio focus for alarm
+//        am = mContext.getSystemService(Context.AUDIO_SERVICE);
+//        int result = am.requestAudioFocus(afChangeListener,
+//                    // Use the alarm stream.
+//                    AudioManager.STREAM_ALARM,
+//                    // Request permanent focus.
+//                    AudioManager.AUDIOFOCUS_GAIN);
+//
+//        if (result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
             // initialize media player
-            mMediaPlayer = MediaPlayer.create(context, R.raw.alarm_sound_file);
+            mMediaPlayer = MediaPlayer.create(this, R.raw.alarm_file);
             mMediaPlayer.setWakeMode(getApplicationContext(), PowerManager.PARTIAL_WAKE_LOCK);
             mMediaPlayer.setOnPreparedListener(this);
             mMediaPlayer.prepareAsync(); // prepare async to not block main thread
-        }
+        //}
+
+            Toast.makeText(this, "sound should be triggered.", Toast.LENGTH_LONG).show();
     }
 
     /** Called when MediaPlayer is ready */
@@ -58,8 +60,8 @@ public class AlarmSoundService extends Service implements MediaPlayer.OnPrepared
     //binding blocks
 
     public class LocalBinder extends Binder {
-        LocalService getService() {
-            return LocalService.this;
+        AlarmSoundService getService() {
+            return AlarmSoundService.this;
         }
     }
 
