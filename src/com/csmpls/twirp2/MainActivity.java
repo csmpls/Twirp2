@@ -24,7 +24,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
- 
+
 public class MainActivity extends Activity {
     // Constants
     /**
@@ -211,6 +211,7 @@ public class MainActivity extends Activity {
         }
          
     }
+
 
     /**
      * Switch to tweet interface

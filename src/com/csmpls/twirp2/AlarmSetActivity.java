@@ -1,6 +1,7 @@
 package com.csmpls.twirp2;
 
 import java.util.Calendar;
+import java.util.Date;
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -17,8 +18,6 @@ public class AlarmSetActivity extends Activity {
 	TimePicker timePicker;
 	Button setAlarm;
 	Button goToTweet;
-
-	private PendingIntent pendingIntent;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -39,24 +38,40 @@ public class AlarmSetActivity extends Activity {
 
 	public void setAlarm(View view) {
 
-		Intent myIntent = new Intent(AlarmSetActivity.this, MainActivity.class);
-  		pendingIntent = PendingIntent.getService(AlarmSetActivity.this, 0, myIntent, 0);
-
-
+		Intent myIntent = new Intent(getBaseContext(), AlarmReceiver.class);
+    	PendingIntent pendingIntent = PendingIntent.getBroadcast(
+    		getBaseContext(), 0, myIntent, 0);
+  
 		AlarmManager alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
 
-		Calendar nextAlarm = Calendar.getInstance();
-		nextAlarm.add(Calendar.DAY, 1);
-		nextAlarm.set(Calendar.HOUR, timePicker.getCurrentHour());
-		nextAlarm.set(Calendar.MINUTE, timePicker.getCurrentMinute());
-		long triggerInMillis = daysBetween(Calendar.getInstance(), nextAlarm);
-
 		alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, 
-			triggerInMillis(),
+			findNextAlarmInMillis(),
 			86400000,
 			pendingIntent);
      
 		Toast.makeText(AlarmSetActivity.this, "alarm set.", Toast.LENGTH_LONG).show();
+
+		finish();
+
+	}
+
+	public long findNextAlarmInMillis() {
+
+		Calendar calendar = Calendar.getInstance();
+		int CurHour = calendar.get(Calendar.HOUR);
+		int CurMin = calendar.get(Calendar.MINUTE);
+		
+		Calendar nextAlarm = Calendar.getInstance();
+		int AlarmHour = timePicker.getCurrentHour();
+		int AlarmMin = timePicker.getCurrentMinute();
+		nextAlarm.set(Calendar.HOUR_OF_DAY, AlarmHour);
+		nextAlarm.set(Calendar.MINUTE, AlarmMin);
+		nextAlarm.set(Calendar.SECOND, 0);
+		nextAlarm.set(Calendar.MILLISECOND, 0);
+
+		if (AlarmHour <= CurHour) { if (AlarmMin <= CurMin) { calendar.add(Calendar.HOUR, 24); } } 
+
+		return nextAlarm.getTimeInMillis();
 
 	}
 	
@@ -65,25 +80,6 @@ public class AlarmSetActivity extends Activity {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
-
-    public static long daysBetween(final Calendar startDate, final Calendar endDate) {  
-		 
-		 int MILLIS_IN_DAY = 86400000;  
-		 long endInstant = endDate.getTimeInMillis();  
-		 int presumedDays = (int) ((endInstant - startDate.getTimeInMillis()) / MILLIS_IN_DAY);  
-		 Calendar cursor = (Calendar) startDate.clone();  
-		 cursor.add(Calendar.DAY_OF_YEAR, presumedDays);  
-		 long instant = cursor.getTimeInMillis();  
-		 if (instant == endInstant)  
-		  return presumedDays;  
-		 final int step = instant < endInstant ? 1 : -1;  
-		 do {  
-		  cursor.add(Calendar.DAY_OF_MONTH, step);  
-		  presumedDays += step;  
-		 } while (cursor.getTimeInMillis() != endInstant);  
-		 return presumedDays;  
-}  
-
     
 
 }
