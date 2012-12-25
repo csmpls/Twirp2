@@ -6,11 +6,11 @@
     <string name="menu_settings">Settings</string>
     <string name="title_activity_alarm_set">AlarmSetActivity</string>
 
-    <color name="page">#053B44</color>
-    <color name="text">#A53539</color>
-    <color name="textbox_page">#06736C</color>
-    <color name="textbox_text">#EAD075</color>
-    <color name="textbox_hint">#EAD075</color>
+    <color name="page">#000000</color>
+    <color name="text">#FFFFFF</color>
+    <color name="textbox_page">#FFFFFF</color>
+    <color name="textbox_text">#000000</color>
+    <color name="textbox_hint">#cccccc</color>
 
 
 
