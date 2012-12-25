@@ -10,6 +10,7 @@
     <color name="text">#A53539</color>
     <color name="textbox_page">#06736C</color>
     <color name="textbox_text">#EAD075</color>
+    <color name="textbox_hint">#EAD075</color>
 
 
 

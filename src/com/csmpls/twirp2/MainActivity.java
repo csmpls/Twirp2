@@ -145,6 +145,7 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
                 loginToTwitter();   
+                checkForInternetConnection();
             }
         });
  
@@ -181,7 +182,6 @@ public class MainActivity extends Activity {
                     Log.e("Twitter OAuth Token", "> " + accessToken.getToken());
  
                     showTweetInterface();
-                    checkForInternetConnection();
  
                     // Getting user details from twitter
                     // For now i am getting his name only
@@ -198,7 +198,6 @@ public class MainActivity extends Activity {
             }
         } else {
         	showTweetInterface();
-        	checkForInternetConnection();
         }
         
         
