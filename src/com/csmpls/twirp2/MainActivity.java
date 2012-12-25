@@ -57,6 +57,8 @@ public class MainActivity extends Activity {
     // lbl update
     TextView lblUpdate;
     TextView lblUserName;
+    //retry connection
+    Button btnRetryConnection;
  
     // Progress dialog
     ProgressDialog pDialog;
@@ -86,28 +88,8 @@ public class MainActivity extends Activity {
         // start alarm playing
         mMediaPlayer = MediaPlayer.create(this, R.raw.alarm_file);
         mMediaPlayer.start();
+        mMediaPlayer.setLooping(true);
         
-        //
-        // twitter block
-        //
-        cd = new ConnectionDetector(getApplicationContext());
- 
-        // Check if Internet present
-        if (!cd.isConnectingToInternet()) {
-            // Internet Connection is not present
-            alert.showAlertDialog(MainActivity.this, "Internet Connection Error",
-                    "Please connect to working Internet connection", false);
-            // stop executing code by return
-            return;
-        }
- 
-        // Check if twitter keys are set
-        if(TWITTER_CONSUMER_KEY.trim().length() == 0 || TWITTER_CONSUMER_SECRET.trim().length() == 0){
-            // Internet Connection is not present
-            alert.showAlertDialog(MainActivity.this, "Twitter oAuth tokens", "Please set your twitter oauth tokens first!", false);
-            // stop executing code by return
-            return;
-        }
  
         // All UI elements
         btnLoginTwitter = (Button) findViewById(R.id.btnLoginTwitter);
@@ -115,10 +97,12 @@ public class MainActivity extends Activity {
         txtUpdate = (EditText) findViewById(R.id.txtUpdateStatus);
         lblUpdate = (TextView) findViewById(R.id.lblUpdate);
         lblUserName = (TextView) findViewById(R.id.lblUserName);
+        btnRetryConnection = (Button) findViewById(R.id.btnRetryConnection);
  
         // Shared Preferences
         mSharedPreferences = getApplicationContext().getSharedPreferences(
                 "MyPref", 0);
+        
  
         /**
          * Twitter login button click event will call loginToTwitter() function
@@ -157,6 +141,15 @@ public class MainActivity extends Activity {
                 }
             }
         });
+
+
+        btnRetryConnection.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                loginToTwitter();   
+            }
+        });
  
     
  
@@ -191,6 +184,7 @@ public class MainActivity extends Activity {
                     Log.e("Twitter OAuth Token", "> " + accessToken.getToken());
  
                     showTweetInterface();
+                    checkForInternetConnection();
  
                     // Getting user details from twitter
                     // For now i am getting his name only
@@ -207,10 +201,50 @@ public class MainActivity extends Activity {
             }
         } else {
         	showTweetInterface();
+        	checkForInternetConnection();
         }
-
+        
+        
 
          
+    }
+    
+    public void checkForInternetConnection() {
+    	//
+        // check if connection
+        //
+        cd = new ConnectionDetector(getApplicationContext());
+ 
+        // Check if Internet present
+        if (!cd.isConnectingToInternet()) {
+        	
+            // Internet Connection is not present
+        	showRetryInterface();
+            alert.showAlertDialog(MainActivity.this, "Internet Connection Error",
+                    "Please connect to working Internet connection", false);
+            
+        }
+ 
+        // Check if twitter keys are set
+        if(TWITTER_CONSUMER_KEY.trim().length() == 0 || TWITTER_CONSUMER_SECRET.trim().length() == 0){
+            // Internet Connection is not present
+            alert.showAlertDialog(MainActivity.this, "Twitter oAuth tokens", "Please set your twitter oauth tokens first!", false);
+            // stop executing code by return
+            return;
+        }
+    }
+
+    private void showRetryInterface() {
+        btnLoginTwitter.setVisibility(View.GONE);
+        lblUserName.setVisibility(View.GONE);
+        btnRetryConnection.setVisibility(View.VISIBLE);
+        
+     // hide tweet things
+        btnUpdateStatus.setVisibility(View.GONE);
+        txtUpdate.setVisibility(View.GONE);
+        lblUpdate.setVisibility(View.GONE);
+        lblUserName.setText("");
+        lblUserName.setVisibility(View.GONE);
     }
 
 
@@ -220,6 +254,9 @@ public class MainActivity extends Activity {
     private void showTweetInterface() {
         // logIN > logOUT 
         btnLoginTwitter.setVisibility(View.GONE);
+
+        //hide retry button just in case
+        btnRetryConnection.setVisibility(View.GONE);
 
         // show tweet things
         txtUpdate.setVisibility(View.VISIBLE);
@@ -251,6 +288,7 @@ public class MainActivity extends Activity {
                         .parse(requestToken.getAuthenticationURL())));
             } catch (TwitterException e) {
                 e.printStackTrace();
+                //showRetryInterface();
             }
         } else {
             showTweetInterface();

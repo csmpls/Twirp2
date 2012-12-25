@@ -44,5 +44,14 @@
         android:layout_marginLeft="10dip"
         android:layout_marginRight="10dip"
         android:visibility="gone"/>
+
+    <!-- Retry Connection Button -->
+    <Button android:id="@+id/btnRetryConnection"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="retry"
+        android:layout_marginLeft="10dip"
+        android:layout_marginRight="10dip"
+        android:visibility="gone"/>
   
 </LinearLayout>

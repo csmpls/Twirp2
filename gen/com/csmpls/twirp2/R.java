@@ -15,11 +15,12 @@ public final class R {
     }
     public static final class id {
         public static final int btnLoginTwitter=0x7f080003;
+        public static final int btnRetryConnection=0x7f080008;
         public static final int btnUpdateStatus=0x7f080007;
         public static final int goToTweet=0x7f080002;
         public static final int lblUpdate=0x7f080005;
         public static final int lblUserName=0x7f080004;
-        public static final int menu_settings=0x7f080008;
+        public static final int menu_settings=0x7f080009;
         public static final int setAlarm=0x7f080001;
         public static final int timePicker=0x7f080000;
         public static final int txtUpdateStatus=0x7f080006;
@@ -31,7 +32,6 @@ public final class R {
     public static final class menu {
         public static final int activity_alarm_set=0x7f070000;
         public static final int activity_main=0x7f070001;
-        public static final int activity_tweet=0x7f070002;
     }
     public static final class raw {
         public static final int alarm_file=0x7f040000;
