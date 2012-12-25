@@ -54,8 +54,6 @@ public class MainActivity extends Activity {
     Button btnUpdateStatus;
     // EditText for update
     EditText txtUpdate;
-    // lbl update
-    TextView lblUpdate;
     TextView lblUserName;
     //retry connection
     Button btnRetryConnection;
@@ -95,7 +93,6 @@ public class MainActivity extends Activity {
         btnLoginTwitter = (Button) findViewById(R.id.btnLoginTwitter);
         btnUpdateStatus = (Button) findViewById(R.id.btnUpdateStatus);
         txtUpdate = (EditText) findViewById(R.id.txtUpdateStatus);
-        lblUpdate = (TextView) findViewById(R.id.lblUpdate);
         lblUserName = (TextView) findViewById(R.id.lblUserName);
         btnRetryConnection = (Button) findViewById(R.id.btnRetryConnection);
  
@@ -242,7 +239,6 @@ public class MainActivity extends Activity {
      // hide tweet things
         btnUpdateStatus.setVisibility(View.GONE);
         txtUpdate.setVisibility(View.GONE);
-        lblUpdate.setVisibility(View.GONE);
         lblUserName.setText("");
         lblUserName.setVisibility(View.GONE);
     }
@@ -260,7 +256,6 @@ public class MainActivity extends Activity {
 
         // show tweet things
         txtUpdate.setVisibility(View.VISIBLE);
-        lblUpdate.setVisibility(View.VISIBLE);
         btnUpdateStatus.setVisibility(View.VISIBLE);
         lblUserName.setText("");
         lblUserName.setVisibility(View.VISIBLE);
@@ -389,7 +384,6 @@ public class MainActivity extends Activity {
         // hide tweet things
         btnUpdateStatus.setVisibility(View.GONE);
         txtUpdate.setVisibility(View.GONE);
-        lblUpdate.setVisibility(View.GONE);
         lblUserName.setText("");
         lblUserName.setVisibility(View.GONE);
  
