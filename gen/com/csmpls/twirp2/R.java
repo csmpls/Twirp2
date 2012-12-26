@@ -38,6 +38,7 @@ public final class R {
     public static final class menu {
         public static final int activity_alarm_set=0x7f080000;
         public static final int activity_main=0x7f080001;
+        public static final int activity_tweet=0x7f080002;
     }
     public static final class raw {
         public static final int alarm_file=0x7f040000;
