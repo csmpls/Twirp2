@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Twirp2</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="menu_settings">Settings</string>
-    <string name="title_activity_alarm_set">AlarmSetActivity</string>
+	<string name="app_name">twirp</string>
+    <string name="textbox_def">tweet something original, prove you\'re actually awake</string>
+    <string name="alarm_button">ok tweet this + turn off alarm</string>
+    <string name="login_button">login to twitter</string>
+    <string name="retry_button">retry connection</string>
+    <string name="menu_settings">MENU SETTINGS</string>
+    <string name="pick_time">pick alarm time</string>
 
     <color name="page">#000000</color>
     <color name="text">#FFFFFF</color>
     <color name="textbox_page">#FFFFFF</color>
     <color name="textbox_text">#000000</color>
     <color name="textbox_hint">#cccccc</color>
-
 
 
 </resources>

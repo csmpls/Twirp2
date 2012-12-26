@@ -9,8 +9,6 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="set alarm time"
-        android:layout_marginLeft="10dip"
-        android:layout_marginRight="10dip"
         android:layout_marginTop="200dip"/>
 
     <Button android:id="@+id/setAlarm"
