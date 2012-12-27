@@ -83,6 +83,7 @@ public class MainActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN); 
         setContentView(R.layout.activity_main);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         
@@ -111,9 +112,6 @@ public class MainActivity extends Activity {
         lblUserName = (TextView) findViewById(R.id.lblUserName);
         btnRetryConnection = (Button) findViewById(R.id.btnRetryConnection);
  
-        // Shared Preferences
-        mSharedPreferences = getApplicationContext().getSharedPreferences(
-                "MyPref", 0);
  
         /**
          * Twitter login button click event will call loginToTwitter() function
