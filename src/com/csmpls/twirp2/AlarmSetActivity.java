@@ -11,8 +11,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -24,7 +24,6 @@ public class AlarmSetActivity extends Activity {
 	public static final String ALARM_ENABLED = "IsAlarmEnabled";
 
 	TimePicker timePicker;
-	Button setAlarm;
 	Button goToTweet;
 	CheckBox enableCheckBox;
 	boolean AlarmEnabled;
@@ -38,10 +37,10 @@ public class AlarmSetActivity extends Activity {
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_alarm_set);
 
-		setAlarm = (Button) findViewById(R.id.setAlarm);
 		timePicker = (TimePicker) findViewById(R.id.timePicker);
 		timePicker.setIs24HourView(true); // should adjust to user's clock
 		goToTweet = (Button) findViewById(R.id.goToTweet);
+		enableCheckBox = (CheckBox) findViewById(R.id.enableCheckBox);
 
 		// Shared Preferences
 	    SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
@@ -64,33 +63,42 @@ public class AlarmSetActivity extends Activity {
 
 	public void setAlarm(View view) {
 
+		 AlarmEnabled = ((CheckBox) view).isChecked();
 
+		 // set intent
 		Intent myIntent = new Intent(getBaseContext(), AlarmReceiver.class);
     	PendingIntent pendingIntent = PendingIntent.getBroadcast(
     		getBaseContext(), 0, myIntent, 0);
-  
 		AlarmManager alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
 
-		alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, 
-			findNextAlarmInMillis(),
-			86400000,
-			pendingIntent);
+		if (AlarmEnabled) {
+
+			//set alarm 
+			alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, 
+				findNextAlarmInMillis(),
+				86400000,
+				pendingIntent);
+			Toast.makeText(AlarmSetActivity.this, "alarm set.", Toast.LENGTH_SHORT).show();
+		
+		} else {
+			//cancel alarm
+			alarmManager.cancel(pendingIntent);
+			Toast.makeText(AlarmSetActivity.this, "alarm canceled.", Toast.LENGTH_SHORT).show();
+		}
 		
 		saveAlarmSettings();
-		
-		Toast.makeText(AlarmSetActivity.this, "alarm set.", Toast.LENGTH_LONG).show();
-
-		finish();
-
+	
 	}
 
 	public void saveAlarmSettings() {
+
 		// save current settings 
 		SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
 		SharedPreferences.Editor editor = settings.edit(); 
 		//editor.putBoolean(ALARM_ENABLED, true); 
 		editor.putInt(ALARM_HOUR, AlarmHour); 
 		editor.putInt(ALARM_MINUTE, AlarmMin); 
+		editor.putBoolean(ALARM_ENABLED, AlarmEnabled); 
 		editor.commit();
 	}
 
