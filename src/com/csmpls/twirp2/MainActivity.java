@@ -14,6 +14,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.pm.ActivityInfo;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -87,9 +88,20 @@ public class MainActivity extends Activity {
         
         
         // start alarm playing
-        mMediaPlayer = MediaPlayer.create(this, R.raw.alarm_file);
-        mMediaPlayer.start();
+        mMediaPlayer = new MediaPlayer();
+        mMediaPlayer.setAudioStreamType(AudioManager.STREAM_ALARM);
+        Uri alarm_uri=Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.alarm_file);
+        try {
+            mMediaPlayer.setDataSource(this,alarm_uri);
+            mMediaPlayer.prepare();
+        } catch (Exception e) {
+        	//hm failure
+        	Log.e("couldn't start alarm sound", "> " + e.getMessage());
+        }
         mMediaPlayer.setLooping(true);
+        
+        mMediaPlayer.start();
+        
         
  
         // All UI elements
