@@ -21,10 +21,13 @@ public class AlarmSetActivity extends Activity {
 	public static final String PREFS_NAME = "PrefsFile";
 	public static final String ALARM_HOUR = "AlarmHour";
 	public static final String ALARM_MINUTE = "AlarmMinute";
+	public static final String ALARM_ENABLED = "IsAlarmEnabled";
 
 	TimePicker timePicker;
 	Button setAlarm;
 	Button goToTweet;
+	CheckBox enableCheckBox;
+	boolean AlarmEnabled;
 
 	int AlarmHour, AlarmMin;
 
@@ -44,10 +47,12 @@ public class AlarmSetActivity extends Activity {
 	    SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
 	    AlarmHour = settings.getInt(ALARM_HOUR, 12);
 	    AlarmMin = settings.getInt(ALARM_MINUTE, 0);
+	    AlarmEnabled = settings.getBoolean(ALARM_ENABLED, false);
 
-	    //Set the Time Picker's Hour, Minute, AM/PM
+	    //Set the UI to settings
 	    timePicker.setCurrentHour(AlarmHour);
 	    timePicker.setCurrentMinute(AlarmMin);
+	    enableCheckBox.setChecked(AlarmEnabled);
 	}
 
 	@Override
