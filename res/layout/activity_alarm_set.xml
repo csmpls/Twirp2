@@ -29,4 +29,14 @@
         android:onClick="setAlarm"
         android:text="alarm enabled" />
 
+    <Button
+        android:id="@+id/pickTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/enableCheckBox"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="18dp"
+        android:onClick="showTimePicker"
+        android:text="pick time" />
+
 </RelativeLayout>
