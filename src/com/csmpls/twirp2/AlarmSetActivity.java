@@ -35,8 +35,8 @@ public class AlarmSetActivity extends FragmentActivity {
 	CheckBox enableCheckBox;
 	boolean AlarmEnabled;
 
-	static int AlarmHour;
-	static int AlarmMin;
+	int AlarmHour;
+	int AlarmMin;
 
 
 	@Override
@@ -67,11 +67,11 @@ public class AlarmSetActivity extends FragmentActivity {
 		return true;
 	}
 
-	public void setAlarm(View view) {
+	public void setAlarm() {
 
-		 AlarmEnabled = ((CheckBox) view).isChecked();
+		 AlarmEnabled = enableCheckBox.isChecked();
 
-		 // set intent
+		// set intent
 		Intent myIntent = new Intent(getBaseContext(), AlarmReceiver.class);
     	PendingIntent pendingIntent = PendingIntent.getBroadcast(
     		getBaseContext(), 0, myIntent, 0);
@@ -84,17 +84,21 @@ public class AlarmSetActivity extends FragmentActivity {
 				findNextAlarmInMillis(),
 				86400000,
 				pendingIntent);
+
+			// display notice alarm was set
 			Toast.makeText(AlarmSetActivity.this, "alarm set.", Toast.LENGTH_SHORT).show();
 		
 		} else {
 			//cancel alarm
 			alarmManager.cancel(pendingIntent);
-			Toast.makeText(AlarmSetActivity.this, "alarm canceled.", Toast.LENGTH_SHORT).show();
 		}
 		
 		saveAlarmSettings();
+
+		displaySavedTime();
 	
 	}
+
 
 	public void saveAlarmSettings() {
 
@@ -114,22 +118,6 @@ public class AlarmSetActivity extends FragmentActivity {
 		Calendar calendar = Calendar.getInstance();
 		int CurHour = calendar.get(Calendar.HOUR_OF_DAY);
 		int CurMin = calendar.get(Calendar.MINUTE);
-		
-
-		//			*
-		//
-		// ALARMHOUR
-		// and
-		// ALARM MINUTE
-		//
-		// must be set as soon as the 
-		// timePickerDialog is closed
-		//
-		//			*
-
-
-		//AlarmHour = timePicker.getCurrentHour();
-		//AlarmMin = timePicker.getCurrentMinute();
 		
 		Calendar nextAlarm = Calendar.getInstance();
 		nextAlarm.set(Calendar.HOUR_OF_DAY, AlarmHour);
@@ -175,7 +163,7 @@ public class AlarmSetActivity extends FragmentActivity {
       	saveAlarmSettings();
       }
     
-    public static class TimePickerFragment extends DialogFragment
+    public class TimePickerFragment extends DialogFragment
                             implements TimePickerDialog.OnTimeSetListener {
 
 	    @Override
@@ -188,18 +176,13 @@ public class AlarmSetActivity extends FragmentActivity {
 
 	    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
 	    	
-	    	// AlarmHour + AlarmMinute gets
+	    	AlarmHour = hourOfDay;
+	    	AlarmMin = minute;
+	    	
+	    	setAlarm();
+	
 
-	    	// cancel past alarm
-	    	
-	    	// set new alarm
-	    	
-	    	// save settings to preferences
-	    	
-	    	// set displayed time
-	    		
 	    }
-}
-
+	}
 }
 
