@@ -161,7 +161,15 @@ public class AlarmSetActivity extends FragmentActivity {
 	    }
 
 	    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-	        // Do something with the time chosen by the user
+	    	
+	    	// cancel past alarm
+	    	
+	    	// set new alarm
+	    	
+	    	// save settings to preferences
+	    	
+	    	// set displayed time
+	    		
 	    }
 }
 
