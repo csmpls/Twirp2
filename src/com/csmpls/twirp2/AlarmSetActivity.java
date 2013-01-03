@@ -134,7 +134,7 @@ public class AlarmSetActivity extends FragmentActivity {
 
 		Calendar cc = Calendar.getInstance();
 		cc.set(Calendar.HOUR_OF_DAY, AlarmHour);
-		cc.set(Calendar.MINUTE, AlarmHour);
+		cc.set(Calendar.MINUTE, AlarmMin);
 		cc.set(Calendar.SECOND, 0);
 		cc.set(Calendar.MILLISECOND, 0);
 
