@@ -1,5 +1,6 @@
 package com.csmpls.twirp2;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import android.app.AlarmManager;
@@ -17,6 +18,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -28,12 +30,13 @@ public class AlarmSetActivity extends FragmentActivity {
 	public static final String ALARM_MINUTE = "AlarmMinute";
 	public static final String ALARM_ENABLED = "IsAlarmEnabled";
 
-	TimePicker timePicker;
+	TextView textView;
 	Button goToTweet;
 	CheckBox enableCheckBox;
 	boolean AlarmEnabled;
 
-	int AlarmHour, AlarmMin;
+	static int AlarmHour;
+	static int AlarmMin;
 
 
 	@Override
@@ -42,20 +45,18 @@ public class AlarmSetActivity extends FragmentActivity {
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_alarm_set);
 
-		timePicker = (TimePicker) findViewById(R.id.timePicker);
-		timePicker.setIs24HourView(true); // should adjust to user's clock
+		textView = (TextView) findViewById(R.id.textView);
 		goToTweet = (Button) findViewById(R.id.goToTweet);
 		enableCheckBox = (CheckBox) findViewById(R.id.enableCheckBox);
 
 		// Shared Preferences
 	    SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
-	    AlarmHour = settings.getInt(ALARM_HOUR, 12);
+	    AlarmHour = settings.getInt(ALARM_HOUR, 0);
 	    AlarmMin = settings.getInt(ALARM_MINUTE, 0);
 	    AlarmEnabled = settings.getBoolean(ALARM_ENABLED, false);
 
 	    //Set the UI to settings
-	    timePicker.setCurrentHour(AlarmHour);
-	    timePicker.setCurrentMinute(AlarmMin);
+	    displaySavedTime();
 	    enableCheckBox.setChecked(AlarmEnabled);
 	}
 
@@ -113,8 +114,22 @@ public class AlarmSetActivity extends FragmentActivity {
 		Calendar calendar = Calendar.getInstance();
 		int CurHour = calendar.get(Calendar.HOUR_OF_DAY);
 		int CurMin = calendar.get(Calendar.MINUTE);
-		AlarmHour = timePicker.getCurrentHour();
-		AlarmMin = timePicker.getCurrentMinute();
+		
+
+		//			*
+		//
+		// ALARMHOUR
+		// and
+		// ALARM MINUTE
+		//
+		// must be set as soon as the 
+		// timePickerDialog is closed
+		//
+		//			*
+
+
+		//AlarmHour = timePicker.getCurrentHour();
+		//AlarmMin = timePicker.getCurrentMinute();
 		
 		Calendar nextAlarm = Calendar.getInstance();
 		nextAlarm.set(Calendar.HOUR_OF_DAY, AlarmHour);
@@ -124,6 +139,21 @@ public class AlarmSetActivity extends FragmentActivity {
 
 		if (AlarmHour <= CurHour) { if (AlarmMin <= CurMin) { nextAlarm.add(Calendar.DATE, 1); } }
 		return nextAlarm.getTimeInMillis();
+
+	}
+
+	public void displaySavedTime() {
+
+		Calendar cc = Calendar.getInstance();
+		cc.set(Calendar.HOUR_OF_DAY, AlarmHour);
+		cc.set(Calendar.MINUTE, AlarmHour);
+		cc.set(Calendar.SECOND, 0);
+		cc.set(Calendar.MILLISECOND, 0);
+
+		SimpleDateFormat sdf = new SimpleDateFormat("h:mm a");
+		String displayedTime =  sdf.format(cc.getTime());
+
+		textView.setText(displayedTime);
 
 	}
 	
@@ -150,18 +180,16 @@ public class AlarmSetActivity extends FragmentActivity {
 
 	    @Override
 	    public Dialog onCreateDialog(Bundle savedInstanceState) {
-	        // Use the current time as the default values for the picker
-	        final Calendar c = Calendar.getInstance();
-	        int hour = c.get(Calendar.HOUR_OF_DAY);
-	        int minute = c.get(Calendar.MINUTE);
 
 	        // Create a new instance of TimePickerDialog and return it
-	        return new TimePickerDialog(getActivity(), this, hour, minute,
+	        return new TimePickerDialog(getActivity(), this, AlarmHour, AlarmMin,
 	                DateFormat.is24HourFormat(getActivity()));
 	    }
 
 	    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
 	    	
+	    	// AlarmHour + AlarmMinute gets
+
 	    	// cancel past alarm
 	    	
 	    	// set new alarm
