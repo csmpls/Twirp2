@@ -67,6 +67,10 @@ public class AlarmSetActivity extends FragmentActivity {
 		return true;
 	}
 
+	public void toggleAlarm(View view) {
+		setAlarm();
+	}
+
 	public void setAlarm() {
 
 		 AlarmEnabled = enableCheckBox.isChecked();

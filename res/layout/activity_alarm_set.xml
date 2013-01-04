@@ -11,36 +11,37 @@
         android:text="test alarm"
         android:onClick="goToTweetActivity"
         android:layout_marginLeft="10dip"
-        android:layout_marginRight="10dip" />
-
-    <CheckBox
-        android:id="@+id/enableCheckBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/goToTweet"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="22dp"
-        android:onClick="setAlarm"
-        android:text="alarm enabled" />
+        android:layout_marginRight="10dip"
+        android:visibility = "gone" />
 
     <Button
         android:id="@+id/pickTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/enableCheckBox"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="18dp"
+        android:layout_marginBottom="130dp"
         android:onClick="showTimePickerDialog"
-        android:text="pick time" />
+        android:text="@string/set_time" />
+
+    <CheckBox
+        android:id="@+id/enableCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/pickTime"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="54dp"
+        android:onClick="toggleAlarm"
+        android:text="alarm enabled"
+        android:textSize="10sp" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_above="@+id/enableCheckBox"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="120dp"
         android:text="@string/default_time"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:textSize="50sp" />
 
 </RelativeLayout>

@@ -24,11 +24,11 @@ public final class R {
         public static final int btnLoginTwitter=0x7f090007;
         public static final int btnRetryConnection=0x7f090006;
         public static final int btnUpdateStatus=0x7f090005;
-        public static final int enableCheckBox=0x7f090001;
+        public static final int enableCheckBox=0x7f090002;
         public static final int goToTweet=0x7f090000;
         public static final int lblUserName=0x7f090008;
         public static final int menu_settings=0x7f090009;
-        public static final int pickTime=0x7f090002;
+        public static final int pickTime=0x7f090001;
         public static final int textView=0x7f090003;
         public static final int txtUpdateStatus=0x7f090004;
     }
@@ -50,8 +50,8 @@ public final class R {
         public static final int default_time=0x7f050007;
         public static final int login_button=0x7f050003;
         public static final int menu_settings=0x7f050005;
-        public static final int pick_time=0x7f050006;
         public static final int retry_button=0x7f050004;
+        public static final int set_time=0x7f050006;
         public static final int textbox_def=0x7f050001;
     }
     public static final class style {

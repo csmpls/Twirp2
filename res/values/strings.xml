@@ -7,7 +7,7 @@
     <string name="login_button">login to twitter</string>
     <string name="retry_button">retry connection</string>
     <string name="menu_settings">MENU SETTINGS</string>
-    <string name="pick_time">pick alarm time</string>
+    <string name="set_time">set alarm</string>
     <string name="default_time">00:00</string>
 
     <color name="page">#000000</color>
