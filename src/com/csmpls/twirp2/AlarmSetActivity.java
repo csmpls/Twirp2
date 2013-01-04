@@ -90,7 +90,7 @@ public class AlarmSetActivity extends FragmentActivity {
 				pendingIntent);
 
 			// display notice alarm was set
-			Toast.makeText(AlarmSetActivity.this, "alarm set.", Toast.LENGTH_SHORT).show();
+			Toast.makeText(AlarmSetActivity.this, "alarm set for " + getDisplayableTime(), Toast.LENGTH_SHORT).show();
 		
 		} else {
 			//cancel alarm
@@ -129,13 +129,22 @@ public class AlarmSetActivity extends FragmentActivity {
 		nextAlarm.set(Calendar.SECOND, 0);
 		nextAlarm.set(Calendar.MILLISECOND, 0);
 
-		if (AlarmHour <= CurHour) { if (AlarmMin <= CurMin) { nextAlarm.add(Calendar.DATE, 1); } }
-		return nextAlarm.getTimeInMillis();
+		long timeToAlarm = nextAlarm.getTimeInMillis();
+
+		if (timeToAlarm <= System.currentTimeMillis())
+				timeToAlarm += (24*60*60*1000);
+		
+		return timeToAlarm;
 
 	}
 
 	public void displaySavedTime() {
 
+		textView.setText(getDisplayableTime());
+
+	}
+
+	public String getDisplayableTime() {
 		Calendar cc = Calendar.getInstance();
 		cc.set(Calendar.HOUR_OF_DAY, AlarmHour);
 		cc.set(Calendar.MINUTE, AlarmMin);
@@ -143,10 +152,7 @@ public class AlarmSetActivity extends FragmentActivity {
 		cc.set(Calendar.MILLISECOND, 0);
 
 		SimpleDateFormat sdf = new SimpleDateFormat("h:mm a");
-		String displayedTime =  sdf.format(cc.getTime());
-
-		textView.setText(displayedTime);
-
+		return sdf.format(cc.getTime());
 	}
 	
 
