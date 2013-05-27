@@ -1,0 +1,47 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AlarmSetActivity" 
+    android:orientation="vertical">
+
+    <Button android:id="@+id/goToTweet"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="test alarm"
+        android:onClick="goToTweetActivity"
+        android:layout_marginLeft="10dip"
+        android:layout_marginRight="10dip"
+        android:visibility = "gone" />
+
+    <Button
+        android:id="@+id/pickTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="130dp"
+        android:onClick="showTimePickerDialog"
+        android:text="@string/set_time" />
+
+    <CheckBox
+        android:id="@+id/enableCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/pickTime"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="54dp"
+        android:onClick="toggleAlarm"
+        android:text="alarm enabled"
+        android:textSize="10sp" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/enableCheckBox"
+        android:layout_centerHorizontal="true"
+        android:text="@string/default_time"
+        android:textSize="50sp" />
+
+</RelativeLayout>

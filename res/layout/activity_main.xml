@@ -1,0 +1,87 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+
+
+    android:background="@color/page" >
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|top"
+        android:gravity="center_horizontal|top"
+        android:orientation="vertical" >
+
+        <!-- tweet edittext -->
+
+        <EditText
+            android:id="@+id/txtUpdateStatus"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:lines="4" 
+            
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dip"
+            android:layout_marginRight="5dip"
+            android:layout_weight="1"
+            android:gravity="left|top"
+            
+            android:maxLength="140"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:background="@color/textbox_page"
+            android:hint="@string/textbox_def"
+            android:ems="10"
+            
+            android:textColor="@color/textbox_text"
+            android:textColorHint="@color/textbox_hint"
+            android:visibility="visible" />
+
+        <!-- tweet/stop alarm -->
+        <Button
+            android:id="@+id/btnUpdateStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:padding="5dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center_horizontal|center_vertical"
+            android:text="@string/alarm_button"
+            android:visibility="visible" />
+
+        <!-- Retry Connection Button -->
+
+        <Button
+            android:id="@+id/btnRetryConnection"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="@string/retry_button"
+            android:visibility="gone" />
+    </LinearLayout>
+ 
+    <!-- Twitter Login Button -->
+    <Button android:id="@+id/btnLoginTwitter"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/login_button"
+        android:layout_gravity="center_vertical"
+        android:layout_marginTop="30dip"
+        android:visibility="gone"/>
+ 
+    <!-- user name label -->
+    <TextView android:id="@+id/lblUserName"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dip"
+        android:layout_marginTop="0dip" />
+ 
+    <!-- label update status -->
+ 
+    <!-- Tweet EditText -->
+
+  
+</LinearLayout>

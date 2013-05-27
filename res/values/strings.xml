@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+	<string name="app_name">twirp</string>
+    <string name="textbox_def">tweet something original, prove you\'re actually awake</string>
+    <string name="alarm_button">ok tweet this + turn off alarm</string>
+    <string name="login_button">login to twitter</string>
+    <string name="retry_button">retry connection</string>
+    <string name="menu_settings">MENU SETTINGS</string>
+    <string name="set_time">set alarm</string>
+    <string name="default_time">00:00</string>
+
+    <color name="page">#000000</color>
+    <color name="text">#FFFFFF</color>
+    <color name="textbox_page">#FFFFFF</color>
+    <color name="textbox_text">#000000</color>
+    <color name="textbox_hint">#cccccc</color>
+
+
+</resources>
